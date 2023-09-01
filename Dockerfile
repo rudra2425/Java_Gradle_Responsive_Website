@@ -1,11 +1,12 @@
-# Use an official Apache Tomcat image as a base
-FROM tomcat:9.0
+FROM openjdk:11 as base 
+WORKDIR /app
+COPY . . 
+RUN chmod +x gradlew
+RUN ./gradlew build 
 
-# Copy the packaged WAR file into the webapps directory of Tomcat
-COPY build/libs/myapp.war /usr/local/tomcat/webapps/myapp.war
-
-# Expose port 8080 (Tomcat's default port)
+FROM tomcat:9
+WORKDIR webapps
+COPY --from=base /app/build/libs/Responsive_website-0.0.1-SNAPSHOT.war .
+RUN rm -rf ROOT && mv Responsive_website-0.0.1-SNAPSHOT.war ROOT.war 
 EXPOSE 8080
-
-# Start Tomcat when the container is run
 CMD ["catalina.sh", "run"]
