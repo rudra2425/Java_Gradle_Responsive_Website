@@ -2,7 +2,7 @@
 FROM tomcat:9.0
 
 # Copy the packaged WAR file into the webapps directory of Tomcat
-COPY build/libs/Responsive_website-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/my-app.war
+COPY build/libs/myapp.war /usr/local/tomcat/webapps/myapp.war
 
 # Expose port 8080 (Tomcat's default port)
 EXPOSE 8080
