@@ -6,20 +6,21 @@ spec:
   selector:
     matchLabels:
       app: petclinic
-  replicas: 1 
-  template: 
+  replicas: 1
+  template:
     metadata:
       labels:
         app: petclinic
     spec:
-      containers:
       imagePullSecrets:
         - name: registry-secret
-      - name: petclinic
-        image: 15.206.146.149:8084/gradle1:latest
-        ports:
-        - containerPort: 8080
-        imagePullPolicy: Always
+      containers:
+        - name: petclinic
+          image: 15.206.146.149:8084/gradle1:latest
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+
 ---
 apiVersion: v1
 kind: Service
